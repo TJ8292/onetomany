@@ -1,0 +1,40 @@
+info:
+  build:
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+
+
+spring:
+  application:
+    name: ${info.build.name}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: junias
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        ApplicationName: ${info.build.artifactId}-test
+        socketTimeout: 90
+        readOnly: true
+        currentSchema: public
+
+repository:
+  di:
+    schema: public
+
+
+logging:
+  level:
+    root: info
+    com.kuiteul.dbeaver: info
+  file:
+      name: application.log
+      path: ./logs
+
+management:
+  server:
+    port: 8090

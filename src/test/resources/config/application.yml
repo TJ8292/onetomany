@@ -1,0 +1,23 @@
+info:
+  build:
+    artifact: dbeaver
+    name: dbeaver
+    description: Dbeaver
+
+
+
+spring:
+  application:
+    name: ${info.build.name}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/person
+    username: junias
+    password: junias
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        ApplicationName: ${info.build.artifactId}-test
+        socketTimeout: 90
+        readOnly: true
+        currentSchema: public

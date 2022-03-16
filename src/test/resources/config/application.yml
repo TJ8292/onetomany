@@ -11,8 +11,8 @@ spring:
     name: ${info.build.name}
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/person
-    username: junias
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
     password: junias
     hikari:
       auto-commit: false

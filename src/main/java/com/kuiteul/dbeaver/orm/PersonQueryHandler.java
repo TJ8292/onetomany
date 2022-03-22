@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -29,9 +31,15 @@ public class PersonQueryHandler extends AbstractQueryHandler{
         String sql = "select p.id, p.first_name, p.last_name, p.gender from person p " +
                 "where p.id = :id";
 
-        parameterSource.addValue("id", id);
 
-        jdbcTemplate.query(sql, parameterSource, (rs) -> {
+        if (id != 0) {
+            parameterSource.addValue("id", id);
+        }
+
+        final String replace = sql.replace("%CONDITIONS_FRAGMENT%", getConditionsFragment(parameterSource));
+
+
+        jdbcTemplate.query(replace, parameterSource, (rs) -> {
 
             Person person = new Person();
 
@@ -107,7 +115,7 @@ public class PersonQueryHandler extends AbstractQueryHandler{
     private Gender getGender(ResultSet rs, String Columnlabel) throws SQLException {
         final String string = rs.getString(Columnlabel);
 
-        Gender gender = null;
+        Gender gender;
         switch (string) {
             case "Female":
                 gender = Gender.FEMALE;
@@ -118,9 +126,28 @@ public class PersonQueryHandler extends AbstractQueryHandler{
             default:
                 gender = Gender.valueOf("Invalid genre");
                 break;
-
         }
 
         return gender;
+    }
+
+    private String getConditionsFragment(MapSqlParameterSource parameterSource) {
+
+
+        List<String> conditions = new ArrayList<>();
+
+        if (parameterSource.hasValue("product_id")) {
+            conditions.add("p.product_id = :product_id");
+        }
+        if (parameterSource.hasValue("toYear")) {
+            conditions.add("toYear  <= CAST(:toYear as INTEGER)");
+        }
+        if (parameterSource.hasValue("fromYear")) {
+            conditions.add("fromYear  <= CAST(:fromYear as INTEGER)");
+        }
+        if (parameterSource.hasValue("gender")) {
+            conditions.add("gender  IN (:gender)");
+        }
+        return conditions.isEmpty() ? "" : /*"and " +*/ String.join(" and ", conditions);
     }
 }

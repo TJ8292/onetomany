@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "first_name": "Farlie",
+    "last_name": "Itzcovich",
+    "gender": "FEMALE",
+    "pets": [
+      {
+        "commonName": "Macaque, pig-tailed",
+        "color": "Khaki",
+        "person_Id": 1
+      }
+    ],
+    "cars": [
+      {
+        "carId": 1,
+        "make": "Mercedes-Benz",
+        "model": "CLK-Class",
+        "color": "Violet",
+        "modelYear": "2004",
+        "personId": 1
+      },
+      {
+        "carId": 1001,
+        "make": "Geo",
+        "model": "Metro",
+        "color": "Fuscia",
+        "modelYear": "1994",
+        "personId": 1
+      },
+      {
+        "carId": 1002,
+        "make": "Chevrolet",
+        "model": "Silverado 3500",
+        "color": "Goldenrod",
+        "modelYear": "2012",
+        "personId": 1
+      }
+    ]
+  }
+]

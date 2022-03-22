@@ -8,7 +8,7 @@ import java.util.Collection;
 
 
 @Service
-public class DefaultPersonService implements IPersonService{
+public class DefaultPersonService implements PersonService {
 
     private final PersonRepository personRepository;
 

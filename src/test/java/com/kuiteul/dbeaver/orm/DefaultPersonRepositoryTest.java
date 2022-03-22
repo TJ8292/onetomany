@@ -50,7 +50,7 @@ public class DefaultPersonRepositoryTest {
 
     @Test
     void test() {
-        final Collection<Person> personById = personRepository.getPersonById(1);
+        final Collection<Person> personById = personRepository.getPersonsById(1);
         System.out.println(personById);
         Assertions.assertNotNull(personById);
     }

@@ -2,7 +2,7 @@ package com.kuiteul.dbeaver.controller;
 
 
 import com.kuiteul.dbeaver.domain.Person;
-import com.kuiteul.dbeaver.service.IPersonService;
+import com.kuiteul.dbeaver.service.PersonService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +14,9 @@ import java.util.Collection;
 @RequestMapping("/service")
 public class PersonController {
 
-    private final IPersonService personService;
+    private final PersonService personService;
 
-    public PersonController(IPersonService personService) {
+    public PersonController(PersonService personService) {
         this.personService = personService;
     }
 
